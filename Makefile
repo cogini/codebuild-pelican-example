@@ -18,7 +18,7 @@ SSH_USER=thelogin
 SSH_TARGET_DIR=/srv/www/hosts/esample.com/htdocs
 
 AWS_PROFILE=pelican
-S3_BUCKET=www.example.com
+S3_BUCKET?=www.example.com
 
 CLOUDFILES_USERNAME=my_rackspace_username
 CLOUDFILES_API_KEY=my_rackspace_api_key

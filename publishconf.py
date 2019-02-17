@@ -10,7 +10,11 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://www.example.com'
+# Base URL of your website. If not specified, feeds will not be generated with
+# properly-formed URLs. Include http:// and your domain, with no trailing slash
+# at the end.
+# SITEURL = 'https://www.example.com'
+SITEURL = os.getenv('SITEURL', 'https://www.example.com')
 RELATIVE_URLS = False
 
 FEED_DOMAIN = SITEURL

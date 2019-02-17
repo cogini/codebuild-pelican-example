@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  variables:
+    SITEURL: "https://www.cloudnativeelixir.com"
+    S3_BUCKET: www.example.com
+
+# https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+phases:
+  install:
+    commands:
+      - make install
+  # pre_build:
+  #   commands:
+  #     - bin/build pre_build
+  build:
+    commands:
+      - make publish
+  post_build:
+    commands:
+      - aws s3 sync output/ s3://$S3_BUCKET --delete
+# artifacts:
+#   files:
+#     - '**/*'
+#   base-directory: output
+cache:
+  paths:
+    - '/root/.virtualenv/pelican/**/*'
