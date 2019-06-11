@@ -21,7 +21,7 @@ SITESUBTITLE = 'Lorem ipsum'
 SITEDESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
 
 SITELOGO = SITEURL + '/images/logo.png'
-FAVICON = SITEURL + '/images/logo/racing_tab_logo.png'
+FAVICON = SITEURL + '/images/favicon.ico'
 
 BROWSER_COLOR = '#333'
 ROBOTS = 'index, follow'
