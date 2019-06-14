@@ -1,10 +1,11 @@
 # CodeBuild Pelican Example
 
-This is an example of building a static site using [AWS CodeBuild](https://aws.amazon.com/codebuild/).
+This is an example of building a static site using
+[AWS CodeBuild](https://aws.amazon.com/codebuild/).
 
 This site uses the [Pelican](http://docs.getpelican.com/) static site generator.
-Pelican builds static HTML pages using templates, so it's like HTML but we don't
-have to repeat things like CSS includes, menus and footer in every file.
+Pelican builds static HTML pages using templates, so it's like HTML but we
+don't have to repeat things like CSS includes, menus and footer in every file.
 
 # Installation
 
@@ -15,7 +16,7 @@ your environment.
 
 Create a Python virtualenv and install the dependencies into it.
 
-Or for Python 3.x:
+For Python 3.x:
 
 ```shell
 python3 -m venv ~/.virtualenvs/pelican
@@ -23,7 +24,7 @@ source ~/.virtualenvs/pelican/bin/activate
 pip install -r requirements.txt
 ```
 
-For Python 2.x:
+Or for Python 2.x:
 
 ```shell
 virtualenv ~/.virtualenvs/pelican
@@ -36,9 +37,9 @@ pip install -r requirements.txt
 Content is in `content/pages` or `content/blog` and templates are in
 `theme/templates`.
 
-Pelican allows pages to be created in Markdown (like this file) or HTML.
-Markdown is nice for things like blog pages, but static pages are usually more
-heavily designed, so we use HTML.
+Pelican allows content to be created in Markdown (like this file) or HTML.
+Markdown is nice for things like blog posts. Static pages like the home page
+are more heavily designed, so we use HTML.
 
 To create a new blog page, add `topic.md` to it to `content/blog`.
 
@@ -96,7 +97,8 @@ Make links to local content like this:
 
 # Generate content
 
-Every time you run Pelican commands, you have to "activate" the virtualenv:
+Before you run Pelican commands, you have to "activate" the virtualenv to make
+the libraries available to Python:
 
 ```shell
 source ~/.virtualenvs/pelican/bin/activate
@@ -128,8 +130,8 @@ scripts/pelican-livereload.py
 
 # Deploy
 
-We deploy the site to an Amazon S3 bucket, so you need to have
-an AWS account with permissions to write content there.
+We deploy the site to an Amazon S3 bucket, so you need to have an AWS account
+with permissions to write content there.
 
 ## Set up AWS
 
@@ -181,13 +183,14 @@ http://docs.getpelican.com/en/3.6.3/faq.html#i-m-creating-my-own-theme-how-do-i-
 
 https://github.com/honza/vim2pygments
 
-/Users/jake/.asdf/installs/nodejs/8.2.1/.npm/bin/gulp
-
 # Theme
 
-http://docs.getpelican.com/en/3.6.3/themes.html
+A theme in Pelican combines the standard templates which Pelican uses to generate output
+files with custom HTML and CSS.
 
 Making a custom theme:
+
+http://docs.getpelican.com/en/3.6.3/themes.html
 
 ```sh
 cp ~/.virtualenvs/pelican/lib/python3.7/site-packages/pelican/themes/simple/templates theme/templates
