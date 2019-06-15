@@ -15,7 +15,7 @@ phases:
       - apt-get -qq -o=Dpkg::Use-Pty=0 update
       - apt-get -qq -o=Dpkg::Use-Pty=0 upgrade
       - apt-get -qq -o=Dpkg::Use-Pty=0 install dialog apt-utils man
-      - apt-get -qq -o=Dpkg::Use-Pty=0 install make python3
+      - apt-get -qq -o=Dpkg::Use-Pty=0 install make python3 python3-venv
       - make install
   # pre_build:
   #   commands:
