@@ -127,7 +127,7 @@ github: publish
 	git push origin $(GITHUB_PAGES_BRANCH)
 
 install:
-	python3 -m venv ~/.virtualenvs/pelican
+	$(PY) -m venv ~/.virtualenvs/pelican
 	source ~/.virtualenvs/pelican/bin/activate
 	pip install -r requirements.txt
 
