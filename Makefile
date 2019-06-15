@@ -128,7 +128,7 @@ github: publish
 
 install:
 	$(PY) -m venv ~/.virtualenvs/pelican
-	source ~/.virtualenvs/pelican/bin/activate
+	. ~/.virtualenvs/pelican/bin/activate
 	pip install -r requirements.txt
 
 .PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github install
