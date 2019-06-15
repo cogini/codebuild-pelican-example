@@ -6,6 +6,7 @@ env:
     SITEURL: "https://www.rubegoldberg.io"
 #     S3_BUCKET: www.example.com
     DEBIAN_FRONTEND: noninteractive
+    PY: python3
 
 # https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
 phases:
@@ -13,7 +14,7 @@ phases:
     commands:
       - apt-get -qq -o=Dpkg::Use-Pty=0 update
       - apt-get -qq -o=Dpkg::Use-Pty=0 upgrade
-      - apt-get -qq -o=Dpkg::Use-Pty=0 install dialog apt-utils
+      - apt-get -qq -o=Dpkg::Use-Pty=0 install dialog apt-utils man
       - apt-get -qq -o=Dpkg::Use-Pty=0 install make python3
       - make install
   # pre_build:
