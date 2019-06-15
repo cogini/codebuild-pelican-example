@@ -5,13 +5,15 @@ env:
     # Name of the public site
     SITEURL: "https://www.rubegoldberg.io"
 #     S3_BUCKET: www.example.com
+    DEBIAN_FRONTEND: noninteractive
 
 # https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
 phases:
   install:
     commands:
-      - apt update -q
-      - apt install make python3
+      - apt-get update -q
+      - apt-get -qq upgrade
+      - apt-get -qq install make python3
       - make install
   # pre_build:
   #   commands:
