@@ -11,9 +11,10 @@ env:
 phases:
   install:
     commands:
-      - apt-get update -q
-      - apt-get -qq upgrade
-      - apt-get -qq install make python3
+      - apt-get -qq -o=Dpkg::Use-Pty=0 update
+      - apt-get -qq -o=Dpkg::Use-Pty=0 upgrade
+      - apt-get -qq -o=Dpkg::Use-Pty=0 install dialog apt-utils
+      - apt-get -qq -o=Dpkg::Use-Pty=0 install make python3
       - make install
   # pre_build:
   #   commands:
