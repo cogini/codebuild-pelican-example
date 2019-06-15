@@ -10,6 +10,7 @@ env:
 phases:
   install:
     commands:
+      - apt update -q
       - apt install make
       - make install
   # pre_build:
