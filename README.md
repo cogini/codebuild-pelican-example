@@ -37,9 +37,13 @@ pip install -r requirements.txt
 Content is in `content/pages` or `content/blog` and templates are in
 `theme/templates`.
 
+Blog “articles” are chronological content, associated with a date.
+Pages are used for content that does not change very often (e.g., “About Us” or
+“Contact” pages).
+
 Pelican allows content to be created in Markdown (like this file) or HTML.
-Markdown is nice for things like blog posts. Static pages like the home page
-are more heavily designed, so we use HTML.
+Markdown is nice for things like blog posts. Static pages are more heavily
+designed, so we use HTML.
 
 To create a new blog page, add `topic.md` to it to `content/blog`.
 
