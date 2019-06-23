@@ -16,10 +16,11 @@ FTP_TARGET_DIR=/
 SSH_HOST=my.host.com
 SSH_PORT=22
 SSH_USER=thelogin
-SSH_TARGET_DIR=/srv/www/hosts/esample.com/htdocs
+SSH_TARGET_DIR=/srv/www/hosts/example.com/htdocs
 
-AWS_PROFILE?=pelican
-S3_BUCKET?=www.example.com
+AWS_PROFILE?=cogini-prod
+S3_BUCKET?=www.cogini.com
+CDN_DISTRIBUTION_ID?=E15WZSCMYFOVX2
 
 CLOUDFILES_USERNAME=my_rackspace_username
 CLOUDFILES_API_KEY=my_rackspace_api_key
@@ -89,9 +90,9 @@ endif
 
 devserver:
 ifdef PORT
-	$(BASEDIR)/develop_server.sh restart $(PORT)
+	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS) -p $(PORT)
 else
-	$(BASEDIR)/develop_server.sh restart
+	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 endif
 
 stopserver:
@@ -120,6 +121,12 @@ s3_upload: publish
 	# s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
 	AWS_PROFILE=$(AWS_PROFILE) aws s3 sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --delete
 
+cloudfront_list:
+	AWS_PROFILE=$(AWS_PROFILE) aws cloudfront list-distributions
+
+cloudfront_upload: s3_upload
+	AWS_PROFILE=$(AWS_PROFILE) aws cloudfront create-invalidation --distribution-id $(CDN_DISTRIBUTION_ID) --paths "/*"
+
 cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
 
@@ -132,4 +139,4 @@ install:
 	. ~/.virtualenvs/pelican/bin/activate
 	$(PIP) install -r requirements.txt
 
-.PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github install
+.PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cloudfront_upload cloudfront_list cf_upload github
