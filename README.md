@@ -32,6 +32,15 @@ source ~/.virtualenvs/pelican/bin/activate
 pip install -r requirements.txt
 ```
 
+This project includes a `.tool-versions` file for ASDF.
+After installing, you may need to run
+
+```shell
+asdf reshim python
+```
+
+to make the `pelican` command available.
+
 # Authoring
 
 Content is in `content/pages` or `content/blog` and templates are in
