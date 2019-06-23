@@ -9,7 +9,7 @@ SITEURL = ''
 
 AUTHOR = u'Jake Morrison'
 
-# GITHUB_URL = 'https://github.com/ejmorrison16'
+# GITHUB_URL = 'https://github.com/cogini/'
 
 TWITTER_NAME = 'example'
 FACEBOOK_NAME = 'example'
