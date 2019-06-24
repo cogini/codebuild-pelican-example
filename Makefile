@@ -20,7 +20,7 @@ SSH_TARGET_DIR=/srv/www/hosts/example.com/htdocs
 
 AWS_PROFILE?=cogini-prod
 S3_BUCKET?=www.cogini.com
-CDN_DISTRIBUTION_ID?=E15WZSCMYFOVX2
+CLOUDFRONT_DISTRIBUTION_ID?=E15WZSCMYFOVX2
 
 CLOUDFILES_USERNAME=my_rackspace_username
 CLOUDFILES_API_KEY=my_rackspace_api_key
@@ -125,7 +125,7 @@ cloudfront_list:
 	AWS_PROFILE=$(AWS_PROFILE) aws cloudfront list-distributions
 
 cloudfront_upload: s3_upload
-	AWS_PROFILE=$(AWS_PROFILE) aws cloudfront create-invalidation --distribution-id $(CDN_DISTRIBUTION_ID) --paths "/*"
+	AWS_PROFILE=$(AWS_PROFILE) aws cloudfront create-invalidation --distribution-id $(CLOUDFRONT_DISTRIBUTION_ID) --paths "/*"
 
 cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
