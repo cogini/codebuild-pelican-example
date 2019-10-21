@@ -12,6 +12,12 @@ don't have to repeat things like CSS includes, menus and footer in every file.
 Before running commands, you need to install the Pelican libraries and set up
 your environment.
 
+You can do this by running:
+
+    make install
+
+That does the following:
+
 # Set up pelican
 
 Create a Python virtualenv and install the dependencies into it.
@@ -32,8 +38,9 @@ source ~/.virtualenvs/pelican/bin/activate
 pip install -r requirements.txt
 ```
 
-This project includes a `.tool-versions` file for ASDF.
-After installing, you may need to run
+This project includes a `.tool-versions` file which
+manages the python version via [ASDF](https://asdf-vm.com/).
+After installing, you may need to run:
 
 ```shell
 asdf reshim python
@@ -74,6 +81,7 @@ Run `make html` and Pelican will generate the output file in `output/foo/index.h
 The template adds in the CSS and JS references for styling and dynamic functionality.
 
 You can customize the output name used in the URL by setting the slug in the `head`:
+
 ```html
 <meta name="slug" content="foobar" />
 ```
@@ -86,11 +94,18 @@ You can customize the page template the same way:
 
 This uses the special page template `theme/templates/page-foo.html` which
 extends the base template. This lets you customize CSS and JS on a per-page basis.
+
 Add CSS to the `extra_css` section, JavaScript libraries to the
 `extra_vendor_js` section, or JavaScript initialization/configuration code to
 the `js_plugins_init` section.
 
-When you are writing HTML, you link to your new page like this:
+Then reference your template in the HTML:
+
+```html
+<meta name="template" content="page-foo" />
+```
+
+You can then link to your new page:
 
 ```html
 <a href="/foo/">Foo</a>
@@ -119,18 +134,14 @@ source ~/.virtualenvs/pelican/bin/activate
 
 Generate html to run locally:
 
-```shell
-make html
-```
+    make html
 
 Run a local web server to preview the site. This will automatically
 compile the files when they change.
 
-```shell
-make devserver
-open http://localhost:8000/
-make stopserver
-```
+    make devserver
+    open http://localhost:8000/
+    make stopserver
 
 Live reload http://tech.agilitynerd.com/livereload-with-pelican.html
 https://merlijn.vandeen.nl/2015/pelican-livereload.html
@@ -162,6 +173,26 @@ Generate the final HTML and sync the data with the S3 bucket:
 make s3_upload
 ```
 
+Serve files from CloudFront Content Deliver Network (CDN):
+
+    make cloudfront_upload
+
+
+## Setting up AWS
+
+    cd terraform
+
+    # Install terraform and terragrunt using ASDF
+    asdf install
+
+    cd website
+    export ENV=prod
+    source set_env.sh
+
+    cd prod
+    terragrunt plan-all
+    terragrunt apply-all
+
 # Docs
 
 * Home page: https://blog.getpelican.com/
@@ -178,7 +209,7 @@ git clone --recursive https://github.com/getpelican/pelican-plugins
 
 Copy them to the plugins dir.
 
-# Aliases
+## Aliases
 
 If you change the URL, you can make an alias from the old URL to to the new one
 using the https://github.com/Nitron/pelican-alias plugin:
@@ -208,3 +239,9 @@ http://docs.getpelican.com/en/3.6.3/themes.html
 ```sh
 cp ~/.virtualenvs/pelican/lib/python3.7/site-packages/pelican/themes/simple/templates theme/templates
 ```
+
+## TL;DR
+
+    make install
+    source ~/.virtualenvs/bruinracing/bin/activate
+    make cloudfront_upload
