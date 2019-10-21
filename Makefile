@@ -2,6 +2,7 @@ PY?=python
 PIP?=pip
 PELICAN?=pelican
 PELICANOPTS=
+VIRTUALENV?=pelican
 
 BASEDIR=$(CURDIR)
 INPUTDIR=$(BASEDIR)/content
@@ -87,7 +88,6 @@ else
 	cd $(OUTPUTDIR) && $(PY) -m pelican.server 80 0.0.0.0
 endif
 
-
 devserver:
 ifdef PORT
 	$(PELICAN) -lr $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS) -p $(PORT)
@@ -135,8 +135,8 @@ github: publish
 	git push origin $(GITHUB_PAGES_BRANCH)
 
 install:
-	$(PY) -m venv ~/.virtualenvs/pelican
-	. ~/.virtualenvs/pelican/bin/activate
+	$(PY) -m venv ~/.virtualenvs/$(VIRTUALENV)
+	. ~/.virtualenvs/$(VIRTUALENV)/bin/activate
 	$(PIP) install -r requirements.txt
 
 .PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cloudfront_upload cloudfront_list cf_upload github
