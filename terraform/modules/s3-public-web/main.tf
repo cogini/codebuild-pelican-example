@@ -1,7 +1,11 @@
 # Set up S3 bucket for hosting public website
 
+locals {
+  name = var.name == "" ? "${var.org_unique}-${var.app_name}-${var.env}-${var.comp}" : var.name
+}
+
 resource "aws_s3_bucket" "this" {
-  bucket = "${var.org_unique}-${var.app_name}-${var.env}-${var.comp}"
+  bucket = local.name
 
   # cors_rule {
   #   allowed_headers = var.cors_allowed_headers
