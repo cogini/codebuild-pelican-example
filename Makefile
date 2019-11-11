@@ -20,7 +20,7 @@ SSH_USER=thelogin
 SSH_TARGET_DIR=/srv/www/hosts/example.com/htdocs
 
 AWS_PROFILE?=cogini-prod
-S3_BUCKET?=www.cogini.com
+S3_BUCKET?=www.example.com
 CLOUDFRONT_DISTRIBUTION_ID?=E15WZSCMYFOVX2
 
 CLOUDFILES_USERNAME=my_rackspace_username
