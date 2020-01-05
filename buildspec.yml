@@ -1,10 +1,11 @@
+---
 version: 0.2
 
 env:
   variables:
     # Name of the public site
     SITEURL: "https://www.rubegoldberg.io"
-#     S3_BUCKET: www.example.com
+    # BUCKET_WEB: www.example.com
     DEBIAN_FRONTEND: noninteractive
     PY: python3
     PIP: pip3
@@ -26,7 +27,7 @@ phases:
       - make publish
   post_build:
     commands:
-      - aws s3 sync output/ s3://$APP_BUCKET_WEB --delete
+      - aws s3 sync output/ s3://${BUCKET_WEB} --delete
       - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 # artifacts:
 #   files:
